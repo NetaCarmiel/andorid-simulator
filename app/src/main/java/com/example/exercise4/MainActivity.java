@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import static com.example.exercise4.joistick.STICK_DOWN;
+import static com.example.exercise4.joistick.STICK_UP;
+
 public class MainActivity extends Activity {
     RelativeLayout layout_joystick;
     ImageView image_joystick, image_border;
@@ -44,7 +47,7 @@ public class MainActivity extends Activity {
                     textView4.setText("Distance : " + String.valueOf(js.getDistance()));
 
                     int direction = js.get8Direction();
-                    if(direction == joistick.STICK_UP) {
+                    if(direction == STICK_UP) {
                         textView5.setText("Direction : Up");
                     } else if(direction == joistick.STICK_UPRIGHT) {
                         textView5.setText("Direction : Up Right");
@@ -52,7 +55,7 @@ public class MainActivity extends Activity {
                         textView5.setText("Direction : Right");
                     } else if(direction == joistick.STICK_DOWNRIGHT) {
                         textView5.setText("Direction : Down Right");
-                    } else if(direction == joistick.STICK_DOWN) {
+                    } else if(direction == STICK_DOWN) {
                         textView5.setText("Direction : Down");
                     } else if(direction == joistick.STICK_DOWNLEFT) {
                         textView5.setText("Direction : Down Left");
@@ -70,8 +73,21 @@ public class MainActivity extends Activity {
                     textView4.setText("Distance :");
                     textView5.setText("Direction :");
                 }
+                int direction1 = js.get4Direction();
+                sendData(js.getX(), js.getY(), direction1);
                 return true;
             }
         });
+    }
+    public void sendData(float x, float y, int direction) {
+
+        if ((direction== 1) || (direction==5)) {
+
+            String massage = "set controls/flight/elevator" + " " + String.valueOf(y);
+            tcpConnect.Instance().sendMesssage(massage);
+        } else {
+            String massage = "set controls/flight/aileron" + " " + String.valueOf(x);
+            tcpConnect.Instance().sendMesssage(massage);
+        }
     }
 }

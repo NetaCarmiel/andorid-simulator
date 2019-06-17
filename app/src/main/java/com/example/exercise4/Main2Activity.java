@@ -11,7 +11,7 @@ public class Main2Activity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
     }
 
     public void connect(View view) {
@@ -26,6 +26,5 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 
 }

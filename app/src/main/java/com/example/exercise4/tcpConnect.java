@@ -7,6 +7,7 @@ import java.net.Socket;
 public class tcpConnect {
     private Socket socket;
     private static tcpConnect s_instance = null;
+    PrintWriter out;
 
     public static tcpConnect Instance() {
         if (s_instance == null){
@@ -22,6 +23,7 @@ public class tcpConnect {
                 try {
                     socket = new Socket(ip, port);
                     System.out.println("connected");
+                    out= new PrintWriter(socket.getOutputStream());
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -35,22 +37,23 @@ public class tcpConnect {
             @Override
             public void run() {
                 System.out.println("Started...");
-                PrintWriter out = null;
+                //PrintWriter out = null;
                 try {
-                    out = new PrintWriter(socket.getOutputStream());
+                    //out = new PrintWriter(socket.getOutputStream());
+                    String messageStr = message;
                     out.println(message + "\r\n");
                     out.flush();
 
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    if (out != null) {
-                        out.close();
-                    }
-                }
+                } //finally {
+                  //  if (out != null) {
+                  //      out.close();
+                  //  }
+               // }
             }
         };
         outThread.start();
     }
+
 }
