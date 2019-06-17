@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Exercise4</string>
+    <string name="title_activity_log_in">log_in</string>
+    <string name="title_activity_log_in_activity">log_in_activity</string>
 </resources>
