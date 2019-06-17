@@ -26,5 +26,9 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    protected void onDestroy(){
+        super.onDestroy();
+        tcpConnect.Instance().disConnect();
+    }
 
 }

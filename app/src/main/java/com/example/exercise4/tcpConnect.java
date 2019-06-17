@@ -31,7 +31,16 @@ public class tcpConnect {
         };
         outThread.start();
     }
-
+    public void disConnect(){
+        if (out != null) {
+            out.close();
+        }
+        try {
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void sendMesssage(final String message) {
         final Thread outThread = new Thread() {
             @Override
